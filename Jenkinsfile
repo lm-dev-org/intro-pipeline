@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Deploy') {
       options {
-        timeout(time: 30, unit: 'SECONDS')
+        timeout(time: 5, unit: 'SECONDS')
       }
       input {
         message 'Which Version?'
@@ -26,7 +26,6 @@ v1.3''', description: 'What to deploy?')
       }
       steps {
         echo "Deploying ${APP_VERSION}."
-      
       }
     }
   }
@@ -34,12 +33,14 @@ v1.3''', description: 'What to deploy?')
     MY_NAME = 'Mary'
     TEST_USER = credentials('test-user')
   }
-  parameters {
-    string(name: 'Name', defaultValue: 'whoever you are', description: 'Who should I say hi to?')
-  }
-   post {
+  post {
     aborted {
       echo 'Why didn\'t you push my button?'
+      
     }
+    
+  }
+  parameters {
+    string(name: 'Name', defaultValue: 'whoever you are', description: 'Who should I say hi to?')
   }
 }
